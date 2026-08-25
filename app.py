@@ -208,25 +208,64 @@ st.markdown("""
         background: linear-gradient(90deg, #059669 0%, #10b981 50%, #34d399 100%);
     }
 
-    .stTabs [data-baseweb="tab-list"] {
+    /* Custom Segmented Tabs (st.radio) */
+    [data-testid="stRadio"] {
+        margin-bottom: 1.25rem;
+    }
+    
+    [data-testid="stRadio"] > div[role="radiogroup"] {
+        display: flex;
         gap: 8px;
-        background: transparent;
-        margin-bottom: 1rem;
+        background: #080808;
+        padding: 5px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        width: 100%;
+        justify-content: center;
     }
 
-    .stTabs [data-baseweb="tab"] {
-        background: #080808;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    [data-testid="stRadio"] label {
+        background: transparent;
+        border: 1px solid transparent;
         border-radius: 8px;
         color: #a1a1aa;
-        padding: 6px 14px;
-        font-size: 0.9rem;
+        padding: 8px 18px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin: 0;
+        flex: 1;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .stTabs [aria-selected="true"] {
-        background: rgba(16, 185, 129, 0.12) !important;
+    [data-testid="stRadio"] label:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    [data-testid="stRadio"] label:has(input:checked),
+    [data-testid="stRadio"] label[data-checked="true"] {
+        background: rgba(16, 185, 129, 0.15) !important;
         border-color: #10b981 !important;
         color: #34d399 !important;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Hide standard radio circle for clean segmented button look */
+    [data-testid="stRadio"] label > div:first-child {
+        display: none !important;
+    }
+
+    [data-testid="stRadio"] label p,
+    [data-testid="stRadio"] label [data-testid="stMarkdownContainer"] p {
+        color: inherit !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+        font-size: 0.92rem !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -471,13 +510,21 @@ if model is None or not class_indices:
     st.error("⚠️ Model file (`plant_disease_model.h5`) or `class_indices.json` not found in workspace.")
     st.stop()
 
-input_tab1, input_tab2 = st.tabs(["📁 Upload Image", "📷 Camera Capture"])
+input_mode = st.radio(
+    "Choose Input Method",
+    ["📁 Upload Image", "📷 Camera Capture"],
+    horizontal=True,
+    label_visibility="collapsed"
+)
 
 uploaded_file = None
-with input_tab1:
-    uploaded_file = st.file_uploader("Upload leaf photo (JPG, PNG, JPEG, WEBP)", type=["jpg", "jpeg", "png", "webp"], key="uploader")
-
-with input_tab2:
+if input_mode == "📁 Upload Image":
+    uploaded_file = st.file_uploader(
+        "Upload leaf photo (JPG, PNG, JPEG, WEBP)",
+        type=["jpg", "jpeg", "png", "webp"],
+        key="uploader"
+    )
+elif input_mode == "📷 Camera Capture":
     camera_file = st.camera_input("Capture leaf photo", key="camera")
     if camera_file is not None:
         uploaded_file = camera_file
