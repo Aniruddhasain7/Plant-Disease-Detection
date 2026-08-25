@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs & Temp
+*.log
+scratch/
