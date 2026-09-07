@@ -1,26 +1,28 @@
 # 🌿 Plant Disease Detection System
 
-An end-to-end Deep Learning & Computer Vision application designed to identify plant leaf diseases and provide immediate treatment and maintenance advisories. Built with **TensorFlow / Keras** and deployed using **Streamlit**.
+An end-to-end Deep Learning & Computer Vision application designed to identify plant leaf diseases in real-time and provide actionable treatment and maintenance advisories. Built using a **Custom Convolutional Neural Network (CNN)** in **TensorFlow / Keras** and deployed with a responsive, modern dark-themed web interface in **Streamlit**.
 
 ---
 
 ## 🌟 Key Features
 
-- 📸 **Dual Input Methods**: Upload high-resolution images (JPG, PNG, JPEG, WEBP) or capture directly using your device camera.
-- 🔬 **Accurate Disease Diagnosis**: Deep Convolutional Neural Network (CNN) trained on the PlantVillage dataset.
-- 📊 **Confidence & Probability Breakdown**: Real-time confidence scores and top-3 diagnostic predictions.
-- 💊 **Treatment & Prevention Advisories**: Tailored recommendations for curing diseases and maintaining crop health.
-- ⚡ **Lightweight Deployment**: Optimized model weights (~45.6 MB) for instant startup and seamless hosting on Streamlit Community Cloud.
+- 📸 **Dual Input Modes**: Upload leaf images (`.jpg`, `.jpeg`, `.png`, `.webp`) or capture live photos using your device camera.
+- 🧠 **Custom Deep CNN Backbone**: Multi-layer Convolutional Neural Network with dropout regularization trained for 5 epochs on the PlantVillage dataset.
+- 🎯 **High Accuracy & Speed**: High diagnostic accuracy with sub-second inference latency.
+- 📊 **Probability Distribution**: Real-time confidence score with a top-3 diagnostic prediction breakdown.
+- 💊 **Actionable Agricultural Advisories**: Tailored treatment, prevention steps, and maintenance practices for every identified disease and healthy crop.
+- ⚡ **Ultra-Lightweight (~10.3 MB)**: Model file is compact and optimized for rapid startup and low-memory environments like Streamlit Community Cloud.
+- 🎨 **Modern Dark UI**: Styled with glassmorphic cards, custom badges, and smooth visual indicators for intuitive user experience.
 
 ---
 
 ## 🌿 Supported Crops & Diseases (15 Classes)
 
-| Crop                 | Diagnostic Classes                                                                                                                                                           |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **🫑 Pepper (Bell)** | Bacterial Spot, Healthy                                                                                                                                                      |
-| **🥔 Potato**        | Early Blight, Late Blight, Healthy                                                                                                                                           |
-| **🍅 Tomato**        | Bacterial Spot, Early Blight, Late Blight, Leaf Mold, Septoria Leaf Spot, Spider Mites (Two-Spotted Spider Mite), Target Spot, Yellow Leaf Curl Virus, Mosaic Virus, Healthy |
+| Crop | Diagnostic Classes |
+| :--- | :--- |
+| **🫑 Pepper (Bell)** | Bacterial Spot, Healthy |
+| **🥔 Potato** | Early Blight, Late Blight, Healthy |
+| **🍅 Tomato** | Bacterial Spot, Early Blight, Late Blight, Leaf Mold, Septoria Leaf Spot, Spider Mites (Two-Spotted Spider Mite), Target Spot, Yellow Leaf Curl Virus, Mosaic Virus, Healthy |
 
 ---
 
@@ -28,13 +30,12 @@ An end-to-end Deep Learning & Computer Vision application designed to identify p
 
 ```text
 Plant-Disease-Detection/
-├── .gitignore                                         # Git ignore configuration
-├── app.py                                             # Streamlit Web Application
-├── class_indices.json                                 # Class index-to-label mappings
-├── Plant_Disease_Detection_using_Tensorflow.ipynb      # Training & evaluation Jupyter notebook
-├── plant_disease_model.h5                             # Trained CNN model weights (Optimized ~45.6 MB)
-├── requirements.txt                                   # Python dependencies for deployment
-└── README.md                                          # Project documentation
+├── app.py
+├── class_indices.json
+├── Plant_Disease_Detection.ipynb
+├── plant_disease_model.h5
+├── requirements.txt
+└── README.md
 ```
 
 ---
@@ -48,7 +49,7 @@ git clone https://github.com/Aniruddhasain7/Plant-Disease-Detection.git
 cd Plant-Disease-Detection
 ```
 
-### 2. Create and Activate Virtual Environment
+### 2. Create and Activate a Virtual Environment
 
 ```bash
 # Windows
@@ -66,35 +67,36 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Launch the Streamlit App
+### 4. Run the Streamlit Application
 
 ```bash
 streamlit run app.py
 ```
 
-Open your browser and navigate to `http://localhost:8501`.
+Open your web browser and navigate to:
+```
+http://localhost:8501
+```
 
 ---
 
-## ☁️ Deployment on Streamlit Cloud
+## ☁️ Deployment on Streamlit Community Cloud
 
-1. Fork or push this repository to your GitHub account.
-2. Go to [share.streamlit.io](https://share.streamlit.io/) and sign in with GitHub.
-3. Click **New app** and select:
+1. **Push your code to GitHub**: Make sure `app.py`, `plant_disease_model.h5`, `class_indices.json`, and `requirements.txt` are in your repository.
+2. **Open Streamlit Community Cloud**: Navigate to [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
+3. **Create New App**:
    - **Repository:** `YourUsername/Plant-Disease-Detection`
-   - **Branch:** `main`
+   - **Branch:** `main` (or `master`)
    - **Main file path:** `app.py`
-4. Click **Deploy!** 🚀
+4. Click **Deploy!** 🚀 The app will install the packages from `requirements.txt` and launch automatically.
 
 ---
 
-## 🧠 Model Architecture & Training
+## 🛠️ Tech Stack & Model Details
 
-- **Input Dimension:** $224 \times 224 \times 3$ (RGB)
-- **Architecture:** Sequential Convolutional Neural Network
-  - Conv2D (32 filters, $3\times3$) + ReLU $\rightarrow$ MaxPooling2D ($2\times2$)
-  - Conv2D (64 filters, $3\times3$) + ReLU $\rightarrow$ MaxPooling2D ($2\times2$)
-  - Flatten $\rightarrow$ Dense (64 units, ReLU) $\rightarrow$ Dense (15 units, Softmax)
-- **Optimizer:** Adam
-- **Loss Function:** Categorical Crossentropy
-- **Dataset:** [PlantVillage Dataset on Kaggle](https://www.kaggle.com/datasets/emmarex/plantdisease)
+- **Language:** Python 3.10+ / 3.11
+- **Deep Learning Framework:** TensorFlow 2.x / Keras
+- **Computer Vision & Image Processing:** Pillow (PIL), NumPy
+- **Web App Framework:** Streamlit
+- **Model Architecture:** Custom Deep CNN (4 Conv Blocks + Dense(256) + Dropout)
+- **Training Setup:** 5 Epochs (Adam Optimizer, Categorical Crossentropy)

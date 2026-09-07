@@ -60,23 +60,31 @@ st.markdown("""
         margin-bottom: 0.8rem;
     }
 
-    .header-title {
-        font-size: 2.3rem;
-        font-weight: 800;
-        color: #ffffff;
-        margin: 0 0 0.4rem 0;
+    .header-title,
+    h1.header-title,
+    .stMarkdown h1.header-title,
+    [data-testid="stMarkdownContainer"] h1.header-title {
+        font-size: 2.3rem !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        margin: 0 0 0.4rem 0 !important;
+        line-height: 1.2 !important;
     }
     
-    .header-title span {
-        color: #10b981;
+    .header-title span,
+    h1.header-title span,
+    .stMarkdown h1.header-title span,
+    [data-testid="stMarkdownContainer"] h1.header-title span {
+        color: #10b981 !important;
     }
 
-    .header-subtitle {
-        color: #a1a1aa;
-        font-size: 0.95rem;
-        margin: 0 auto;
-        max-width: 500px;
-        line-height: 1.5;
+    .header-subtitle,
+    [data-testid="stMarkdownContainer"] .header-subtitle {
+        color: #a1a1aa !important;
+        font-size: 0.95rem !important;
+        margin: 0 auto !important;
+        max-width: 500px !important;
+        line-height: 1.5 !important;
     }
 
     .glass-card {
@@ -156,15 +164,40 @@ st.markdown("""
         padding: 0.5rem 1rem !important;
     }
 
-    [data-testid="stFileUploader"] section {
+    [data-testid="stFileUploader"] section,
+    [data-testid="stFileUploaderDropzone"],
+    [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzoneInput"] {
         background: #080808 !important;
         border: 2px dashed rgba(16, 185, 129, 0.3) !important;
         border-radius: 14px !important;
         padding: 1.25rem !important;
     }
 
-    [data-testid="stFileUploader"] section:hover {
+    [data-testid="stFileUploader"] section:hover,
+    [data-testid="stFileUploaderDropzone"]:hover {
         border-color: #10b981 !important;
+        background: #0d0d0d !important;
+    }
+
+    [data-testid="stFileUploader"] button {
+        background: #141414 !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(16, 185, 129, 0.4) !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+    }
+
+    [data-testid="stFileUploader"] button:hover {
+        border-color: #10b981 !important;
+        background: rgba(16, 185, 129, 0.15) !important;
+        color: #34d399 !important;
+    }
+
+    [data-testid="stCameraInput"] {
+        background: #080808 !important;
+        border: 1px solid rgba(16, 185, 129, 0.25) !important;
+        border-radius: 16px !important;
+        padding: 1rem !important;
     }
 
     [data-testid="stImage"] {
@@ -208,64 +241,93 @@ st.markdown("""
         background: linear-gradient(90deg, #059669 0%, #10b981 50%, #34d399 100%);
     }
 
-    /* Custom Segmented Tabs (st.radio) */
     [data-testid="stRadio"] {
         margin-bottom: 1.25rem;
     }
-    
-    [data-testid="stRadio"] > div[role="radiogroup"] {
-        display: flex;
-        gap: 8px;
-        background: #080808;
-        padding: 5px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        width: 100%;
-        justify-content: center;
-    }
 
-    [data-testid="stRadio"] label {
-        background: transparent;
-        border: 1px solid transparent;
-        border-radius: 8px;
-        color: #a1a1aa;
-        padding: 8px 18px;
-        font-size: 0.92rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        margin: 0;
-        flex: 1;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    [data-testid="stRadio"] label:hover {
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.04);
-    }
-
-    [data-testid="stRadio"] label:has(input:checked),
-    [data-testid="stRadio"] label[data-checked="true"] {
-        background: rgba(16, 185, 129, 0.15) !important;
-        border-color: #10b981 !important;
-        color: #34d399 !important;
-        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
-    }
-
-    /* Hide standard radio circle for clean segmented button look */
-    [data-testid="stRadio"] label > div:first-child {
+    [data-testid="stRadio"] > label,
+    [data-testid="stRadio"] [data-testid="stWidgetLabel"] {
         display: none !important;
     }
+    
+    [data-testid="stRadio"] div[role="radiogroup"],
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 10px !important;
+        background: #080808 !important;
+        padding: 6px !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(16, 185, 129, 0.25) !important;
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
 
-    [data-testid="stRadio"] label p,
-    [data-testid="stRadio"] label [data-testid="stMarkdownContainer"] p {
+    [data-testid="stRadio"] div[role="radiogroup"] label,
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] label {
+        background: #141414 !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        color: #a1a1aa !important;
+        padding: 8px 18px !important;
+        font-size: 0.92rem !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        margin: 0 !important;
+        flex: 1 !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+        min-width: 0 !important;
+    }
+
+    [data-testid="stRadio"] div[role="radiogroup"] label:hover,
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] label:hover {
+        color: #ffffff !important;
+        border-color: rgba(16, 185, 129, 0.5) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+    }
+
+    [data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked),
+    [data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"],
+    [data-testid="stRadio"] div[role="radiogroup"] label:has([aria-checked="true"]),
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] label:has(input:checked) {
+        background: rgba(16, 185, 129, 0.18) !important;
+        border: 1px solid #10b981 !important;
+        color: #34d399 !important;
+        box-shadow: 0 0 14px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    [data-testid="stRadio"] div[role="radiogroup"] label > div:first-child:not([data-testid="stMarkdownContainer"]),
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] label > div:first-child:not([data-testid="stMarkdownContainer"]),
+    [data-testid="stRadio"] input[type="radio"],
+    [data-testid="stRadio"] svg {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    [data-testid="stRadio"] [data-testid="stMarkdownContainer"],
+    [data-testid="stRadio"] [data-testid="stMarkdownContainer"] p,
+    [data-testid="stRadio"] div[role="radiogroup"] label p,
+    [data-testid="stRadio"] div[data-testid="stRadioGroup"] label p {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         color: inherit !important;
         font-weight: 600 !important;
         margin: 0 !important;
         font-size: 0.92rem !important;
+        white-space: nowrap !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -449,8 +511,9 @@ DISEASE_DETAILS = {
     }
 }
 
-MODEL_PATH = "plant_disease_model.h5"
-CLASSES_PATH = "class_indices.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "plant_disease_model.h5")
+CLASSES_PATH = os.path.join(BASE_DIR, "class_indices.json")
 
 @st.cache_resource
 def load_prediction_model():
@@ -501,8 +564,8 @@ class_indices = load_class_indices()
 st.markdown("""
 <div class="header-box">
     <div class="header-badge">AI Diagnostic System</div>
-    <h1 class="header-title">Plant Disease <span>Detection</span></h1>
-    <p class="header-subtitle">Upload or capture a leaf photo for instant deep learning analysis and treatment guidance.</p>
+    <h1 class="header-title" style="font-family: 'Outfit', sans-serif !important; font-size: 2.3rem !important; font-weight: 800 !important; color: #ffffff !important; margin: 0 0 0.4rem 0 !important; line-height: 1.2 !important;">Plant Disease <span style="color: #10b981 !important;">Detection</span></h1>
+    <p class="header-subtitle" style="color: #a1a1aa !important; font-size: 0.95rem !important; margin: 0 auto !important; max-width: 500px !important; line-height: 1.5 !important;">Upload or capture a leaf photo for instant deep learning analysis and treatment guidance.</p>
 </div>
 """, unsafe_allow_html=True)
 
